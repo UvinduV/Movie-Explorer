@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import {
-    AppBar,
     Box,
     Container,
     FormControl,
     MenuItem,
     Select, styled,
-    // SelectChangeEvent,
     Typography,
 } from '@mui/material';
 
