@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,ChangeEvent } from 'react';
 import _ from 'lodash';
 import {
     Box,
     Container,
     FormControl,
     MenuItem,
-    Select, styled,
-    Typography,
+    Select,
+    styled,
+    Typography
 } from '@mui/material';
 
-import MovieCard from './MovieCard.tsx';
-import FilterGroup from './FilterGroup.tsx';
-const apiKey = '183928bab7fc630ed0449e4f66ec21bd'
+import MovieCard from './MovieCard';
+import FilterGroup from './FilterGroup';
 
+const apiKey = '183928bab7fc630ed0449e4f66ec21bd';
 
 interface Movie {
     id: number;
@@ -30,10 +31,10 @@ interface SortConfig {
 
 type MovieListType = 'popular' | 'top_rated' | 'upcoming';
 
-
 interface MovieListProps {
     type: MovieListType;
     title: string;
+    emoji: string;
 }
 
 const MovieContainer = styled(Box)(({ theme }) => ({
@@ -47,7 +48,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
     const [minRating, setMinRating] = useState(0);
-    const [sort, setSort] = useState('default');
+    const [sort, setSort] = useState<SortConfig>({ by: 'default', order: 'asc' });
 
     useEffect(() => {
         fetchMovies();
@@ -80,7 +81,13 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
         }
     };
 
+    const handleSortByChange = (e: ChangeEvent) => {
+        setSort({ ...sort, by: e.target.value as SortConfig['by'] });
+    };
 
+    const handleSortOrderChange = (e: ChangeEvent) => {
+        setSort({ ...sort, order: e.target.value as SortConfig['order'] });
+    };
 
     return (
         <Container component="section" id={type} sx={{ py: 4 }}>
@@ -88,9 +95,8 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                     <Box display="flex" alignItems="center">
                         <Typography variant="h4" component="h2" color="text.primary">
-                            {title}
+                            {emoji} {title}
                         </Typography>
-
                     </Box>
 
                     <Box display="flex" alignItems="center">
@@ -104,10 +110,10 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                             <Select
                                 name="by"
                                 value={sort.by}
-
+                                onChange={handleSortByChange}
                                 displayEmpty
                             >
-                                <MenuItem value="default">SortBy</MenuItem>
+                                <MenuItem value="default">Sort By</MenuItem>
                                 <MenuItem value="release_date">Date</MenuItem>
                                 <MenuItem value="vote_average">Rating</MenuItem>
                             </Select>
@@ -117,7 +123,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                             <Select
                                 name="order"
                                 value={sort.order}
-
+                                onChange={handleSortOrderChange}
                             >
                                 <MenuItem value="asc">Ascending</MenuItem>
                                 <MenuItem value="desc">Descending</MenuItem>
@@ -132,7 +138,6 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                     ))}
                 </Box>
             </MovieContainer>
-
         </Container>
     );
 };
