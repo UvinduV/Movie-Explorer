@@ -30,7 +30,7 @@ export function Navbar() {
         <NavbarContainer position ="static">
             <Toolbar sx={{ justifyContent: "space-between" }}>
                 <Typography variant="h5" component="h1" fontWeight="bold">
-                    Movie Expolorer
+                    Movie Explorer
                 </Typography>
 
                 <NavLinks>

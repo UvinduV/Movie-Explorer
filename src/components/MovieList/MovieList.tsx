@@ -1,4 +1,4 @@
-import { useEffect, useState,ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import {
     Box,
@@ -9,6 +9,7 @@ import {
     styled,
     Typography
 } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
 
 import MovieCard from './MovieCard';
 import FilterGroup from './FilterGroup';
@@ -81,11 +82,11 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
         }
     };
 
-    const handleSortByChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleSortByChange = (e: SelectChangeEvent) => {
         setSort({ ...sort, by: e.target.value as SortConfig['by'] });
     };
 
-    const handleSortOrderChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleSortOrderChange = (e: SelectChangeEvent) => {
         setSort({ ...sort, order: e.target.value as SortConfig['order'] });
     };
 
@@ -143,3 +144,4 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
 };
 
 export default MovieList;
+
