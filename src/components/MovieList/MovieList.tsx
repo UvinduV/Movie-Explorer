@@ -1,0 +1,137 @@
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
+import {
+    Box,
+    Container,
+    FormControl,
+    MenuItem,
+    Select,
+    /*SelectChangeEvent,*/
+    Typography,
+} from '@mui/material';
+
+import MovieCard from './MovieCard.tsx';
+import FilterGroup from './FilterGroup.tsx';
+/*import { Movie,MovieListType, SortConfig } from "./types";*/
+
+interface Movie {
+    id: number;
+    original_title: string;
+    poster_path: string;
+    release_date: string;
+    vote_average: number;
+    overview: string;
+}
+
+interface SortConfig {
+    by: 'default' | 'release_date' | 'vote_average';
+    order: 'asc' | 'desc';
+}
+
+type MovieListType = 'popular' | 'top_rated' | 'upcoming';
+
+
+interface MovieListProps {
+    type: MovieListType;
+    title: string;
+    emoji: string;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
+    const [minRating, setMinRating] = useState(0);
+    const [sort, setSort] = useState<SortConfig>({
+        by: 'default',
+        order: 'asc',
+    });
+
+    useEffect(() => {
+        fetchMovies();
+    }, []);
+
+    useEffect(() => {
+        if (sort.by !== 'default') {
+            const sortedMovies = _.orderBy(filterMovies, [sort.by], [sort.order]);
+            setFilterMovies(sortedMovies);
+        }
+    }, [sort]);
+
+    const fetchMovies = async () => {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/movie/${type}?api_key=183928bab7fc630ed0449e4f66ec21bd`
+        );
+        const data = await response.json();
+        setMovies(data.results);
+        setFilterMovies(data.results);
+    };
+
+    const handleFilter = (rate: number) => {
+        if (rate === minRating) {
+            setMinRating(0);
+            setFilterMovies(movies);
+        } else {
+            setMinRating(rate);
+            const filtered = movies.filter((movie) => movie.vote_average >= rate);
+            setFilterMovies(filtered);
+        }
+    };
+
+    // const handleSort = (e: SelectChangeEvent) => {
+    //     const { name, value } = e.target;
+    //     setSort((prev) => ({ ...prev, [name]: value } as SortConfig));
+    // };
+
+    return (
+        <Container component="section" id={type} sx={{ py: 4 }}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                <Box display="flex" alignItems="center">
+                    <Typography variant="h4" component="h2" color="text.primary">
+                        {title}
+                    </Typography>
+                    <Box component="img" src={emoji} alt={`${emoji} icon`} sx={{ width: 25, height: 25, ml: 1 }} />
+                </Box>
+
+                <Box display="flex" alignItems="center">
+                    <FilterGroup
+                        minRating={minRating}
+                        onRatingClick={handleFilter}
+                        ratings={[8, 7, 6]}
+                    />
+
+                    <FormControl size="small" sx={{ mx: 1, minWidth: 120 }}>
+                        <Select
+                            name="by"
+                            value={sort.by}
+                            /*onChange={handleSort}*/
+                            displayEmpty
+                        >
+                            <MenuItem value="default">SortBy</MenuItem>
+                            <MenuItem value="release_date">Date</MenuItem>
+                            <MenuItem value="vote_average">Rating</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                        <Select
+                            name="order"
+                            value={sort.order}
+                            /*onChange={handleSort}*/
+                        >
+                            <MenuItem value="asc">Ascending</MenuItem>
+                            <MenuItem value="desc">Descending</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+            </Box>
+
+            <Box display="flex" flexWrap="wrap" justifyContent="center">
+                {filterMovies.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                ))}
+            </Box>
+        </Container>
+    );
+};
+
+export default MovieList;
