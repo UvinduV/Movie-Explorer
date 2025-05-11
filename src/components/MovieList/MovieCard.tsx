@@ -2,12 +2,20 @@ import React from 'react';
 import {
     Card,
     CardMedia,
-    CardContent,
     Typography,
     Box,
     styled
 } from '@mui/material';
 import Star from '../../assets/star.png';
+
+interface Movie {
+    id: number;
+    original_title: string;
+    poster_path: string;
+    release_date: string;
+    vote_average: number;
+    overview: string;
+}
 
 const StyledCard = styled(Card)(({ theme }) => ({
     width: 200,
@@ -51,6 +59,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             component="a"
             href={`https://www.themoviedb.org/movie/${movie.id}`}
             target="_blank"
+            sx={{ textDecoration: 'none' }}
         >
             <CardMedia
                 component="img"

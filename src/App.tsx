@@ -8,9 +8,9 @@ function App() {
       <div className='app'>
           <Navbar/>
 
-          <MovieList type='popular' title='Popular' />
-          <MovieList type='top_rated' title='Top Rated' />
-          <MovieList type='upcoming' title='Upcoming' />
+          <MovieList type="popular" title="Popular" emoji="🔥" />
+          <MovieList type="top_rated" title="Top Rated" emoji="🏆" />
+          <MovieList type="upcoming" title="Upcoming" emoji="📅" />
       </div>
 
   )
