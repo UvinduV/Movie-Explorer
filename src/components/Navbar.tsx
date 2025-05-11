@@ -1,6 +1,5 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box, styled } from "@mui/material";
-// import DarkMode from "./DarkMode.tsx";
 import Fire from "../assets/fire.png";
 import Star from "../assets/star.png";
 import Party from "../assets/partying-face.png";
@@ -33,7 +32,7 @@ export function Navbar() {
         <NavbarContainer position ="static">
             <Toolbar sx={{ justifyContent: "space-between" }}>
                 <Typography variant="h5" component="h1" fontWeight="bold">
-                    MovieManiac
+                    Movie Expolorer
                 </Typography>
 
                 <NavLinks>
@@ -48,7 +47,7 @@ export function Navbar() {
                     </NavButton>
                     <NavButton href ="#upcoming">
                         Upcoming
-                        {/*<img src={Party} alt="party face emoji" style={{ marginLeft: 8, height: 20 }} />*/}
+
                     </NavButton>
                 </NavLinks>
             </Toolbar>
