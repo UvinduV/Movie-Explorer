@@ -2,7 +2,6 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box, styled } from "@mui/material";
 import Fire from "../assets/fire.png";
 import Star from "../assets/star.png";
-import Party from "../assets/partying-face.png";
 
 const NavbarContainer = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -38,7 +37,7 @@ export function Navbar() {
                 <NavLinks>
                     {/*<DarkMode />*/}
                     <NavButton href ="#popular">
-                        Popular
+                        Trending
                         <img src={Fire} alt="fire emoji" style={{ marginLeft: 8, height: 20 }} />
                     </NavButton>
                     <NavButton href ="#top_rated">

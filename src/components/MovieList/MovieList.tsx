@@ -81,11 +81,11 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
         }
     };
 
-    const handleSortByChange = (e: ChangeEvent) => {
+    const handleSortByChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSort({ ...sort, by: e.target.value as SortConfig['by'] });
     };
 
-    const handleSortOrderChange = (e: ChangeEvent) => {
+    const handleSortOrderChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSort({ ...sort, order: e.target.value as SortConfig['order'] });
     };
 
