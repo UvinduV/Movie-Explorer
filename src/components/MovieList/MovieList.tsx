@@ -13,6 +13,7 @@ import {
 
 import MovieCard from './MovieCard.tsx';
 import FilterGroup from './FilterGroup.tsx';
+const apiKey = '183928bab7fc630ed0449e4f66ec21bd'
 
 
 interface Movie {
@@ -67,7 +68,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
 
     const fetchMovies = async () => {
         const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${type}?api_key=183928bab7fc630ed0449e4f66ec21bd`
+            `https://api.themoviedb.org/3/movie/${type}?api_key=${apiKey}`
         );
         const data = await response.json();
         setMovies(data.results);
@@ -98,7 +99,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                         <Typography variant="h4" component="h2" color="text.primary">
                             {title}
                         </Typography>
-                        <Box component="img" src={emoji} alt={`${emoji} icon`} sx={{ width: 25, height: 25, ml: 1 }} />
+                        {/*<Box component="img" src={emoji} alt={`${emoji} icon`} sx={{ width: 25, height: 25, ml: 1 }} />*/}
                     </Box>
 
                     <Box display="flex" alignItems="center">
