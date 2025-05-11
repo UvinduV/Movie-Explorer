@@ -86,10 +86,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
         }
     };
 
-    // const handleSort = (e: SelectChangeEvent) => {
-    //     const { name, value } = e.target;
-    //     setSort((prev) => ({ ...prev, [name]: value } as SortConfig));
-    // };
+
 
     return (
         <Container component="section" id={type} sx={{ py: 4 }}>
@@ -99,7 +96,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                         <Typography variant="h4" component="h2" color="text.primary">
                             {title}
                         </Typography>
-                        {/*<Box component="img" src={emoji} alt={`${emoji} icon`} sx={{ width: 25, height: 25, ml: 1 }} />*/}
+
                     </Box>
 
                     <Box display="flex" alignItems="center">
@@ -113,7 +110,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                             <Select
                                 name="by"
                                 value={sort.by}
-                                /*onChange={handleSort}*/
+
                                 displayEmpty
                             >
                                 <MenuItem value="default">SortBy</MenuItem>
@@ -126,7 +123,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
                             <Select
                                 name="order"
                                 value={sort.order}
-                                /*onChange={handleSort}*/
+
                             >
                                 <MenuItem value="asc">Ascending</MenuItem>
                                 <MenuItem value="desc">Descending</MenuItem>

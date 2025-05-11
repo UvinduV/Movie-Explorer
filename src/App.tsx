@@ -2,11 +2,6 @@ import './App.css'
 import {Navbar} from "./components/Navbar.tsx";
 import MovieList from "./components/MovieList/MovieList";
 
-interface MovieListProps {
-    type: 'popular' | 'top_rated' | 'upcoming';
-    title: string;
-    emoji: string;
-}
 function App() {
 
   return (
