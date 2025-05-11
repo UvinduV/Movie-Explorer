@@ -1,4 +1,3 @@
-import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box, styled } from "@mui/material";
 import Fire from "../assets/fire.png";
 import Star from "../assets/star.png";
