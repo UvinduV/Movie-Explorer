@@ -59,9 +59,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             component="a"
             href={`https://www.themoviedb.org/movie/${movie.id}`}
             target="_blank"
-            sx={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none' }}
         >
             <CardMedia
+                sx={{ maxWidth: 200, m: 1 }}
                 component="img"
                 height="100%"
                 image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

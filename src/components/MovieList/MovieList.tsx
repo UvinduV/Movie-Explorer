@@ -34,7 +34,6 @@ type MovieListType = 'popular' | 'top_rated' | 'upcoming';
 interface MovieListProps {
     type: MovieListType;
     title: string;
-    emoji: string;
 }
 
 const MovieContainer = styled(Box)(({ theme }) => ({
@@ -48,10 +47,7 @@ const MovieList: React.FC<MovieListProps> = ({ type, title, emoji }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
     const [minRating, setMinRating] = useState(0);
-    const [sort, setSort] = useState<SortConfig>({
-        by: 'default',
-        order: 'asc',
-    });
+    const [sort, setSort] = useState('default');
 
     useEffect(() => {
         fetchMovies();
